@@ -1,1 +1,3 @@
 # itechart-rails-course
+
+# Veremeichyk
