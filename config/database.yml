@@ -16,7 +16,7 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: watch_finance_development
+  database: watch_finance_test
 
 production:
   <<: *default

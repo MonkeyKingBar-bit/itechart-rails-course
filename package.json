@@ -22,5 +22,10 @@
   "bugs": {
     "url": "https://github.com/MonkeyKingBar-bit/itechart-rails-course/issues"
   },
-  "homepage": "https://github.com/MonkeyKingBar-bit/itechart-rails-course#readme"
+  "homepage": "https://github.com/MonkeyKingBar-bit/itechart-rails-course#readme",
+  "dependencies": {
+    "bootstrap": "^5.1.3",
+    "bootstrap-icons": "^1.7.2",
+    "popper.js": "^1.16.1"
+  }
 }
