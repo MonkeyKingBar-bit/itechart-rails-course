@@ -1,14 +1,16 @@
-<p id="notice"><%= notice %></p>
+<div class="container">
+  <p id="notice"><%= notice %></p>
+  <div class="jumbotron">
+    <h1 class="display-4">
+      <%= @user.login %>
+    </h1>
 
-<p>
-  <strong>Login:</strong>
-  <%= @user.login %>
-</p>
-
-<p>
-  <strong>Password:</strong>
-  <%= @user.password %>
-</p>
-
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+    <p class="lead">
+      <%= @user.password %>
+    </p>
+    <br/>
+    <%= link_to 'Edit', edit_user_path(@user), class:"btn btn-secondary" %> |
+    <%= link_to 'Delete', @user, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %> |
+    <%= link_to 'Back', users_path, class:"btn btn-dark" %>
+  </div>
+</div>
