@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
-  resources :people
   devise_for :users
-  # resources :users
-  root "home#homepage"
+  resources :people
   get "homepage", to: "home#homepage"
+  root "people#index"
 end
