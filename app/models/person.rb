@@ -1,4 +1,8 @@
 class Person < ApplicationRecord
+  validates :first_name, presence: true, length: { minimum: 2 }
+  validates :last_name, presence: true, length: { minimum: 2 }
+  validates :description, presence: true, length: { minimum: 3 }
+
   belongs_to :user
 
   before_create :check_uniqueness
