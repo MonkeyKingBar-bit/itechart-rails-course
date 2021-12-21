@@ -17,7 +17,3 @@ development:
 test:
   <<: *default
   database: watch_finance_test
-
-production:
-  <<: *default
-  database: watch_finance_test
