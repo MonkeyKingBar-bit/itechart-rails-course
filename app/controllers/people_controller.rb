@@ -1,7 +1,15 @@
+# frozen_string_literal: true
+
 class PeopleController < ApplicationController
-  before_action :set_person, only: %i[ show edit update destroy ]
-  before_action :authenticate_user!, except: [:index, :show]
-  before_action :correct_user, only: [:edit, :update, :destroy]
+  before_action :set_person, only: %i[show edit update destroy]
+  before_action :authenticate_user!, except: %i[index show]
+  before_action :correct_user, only: %i[edit update destroy]
+
+  rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
+
+  def render_not_found
+    render 'public/404,html.erb'
+  end
 
   # GET /people or /people.json
   def index
@@ -9,8 +17,7 @@ class PeopleController < ApplicationController
   end
 
   # GET /people/1 or /people/1.json
-  def show
-  end
+  def show; end
 
   # GET /people/new
   def new
@@ -18,8 +25,7 @@ class PeopleController < ApplicationController
   end
 
   # GET /people/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /people or /people.json
   def create
@@ -27,7 +33,7 @@ class PeopleController < ApplicationController
 
     respond_to do |format|
       if @person.save
-        format.html { redirect_to @person, notice: "Person was successfully created." }
+        format.html { redirect_to @person, notice: 'Person was successfully created.' }
         format.json { render :show, status: :created, location: @person }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -40,7 +46,7 @@ class PeopleController < ApplicationController
   def update
     respond_to do |format|
       if @person.update(person_params)
-        format.html { redirect_to @person, notice: "Person was successfully updated." }
+        format.html { redirect_to @person, notice: 'Person was successfully updated.' }
         format.json { render :show, status: :ok, location: @person }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -60,18 +66,19 @@ class PeopleController < ApplicationController
 
   def correct_user
     @person = current_user.people.find_by(person_id: params[:id])
-    redirect_to people_path, notice: "Not Authorized To Edit This Person" if @person.nil?
+    redirect_to people_path, notice: 'Not Authorized To Edit This Person' if @person.nil?
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_person
-      @person = Person.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def person_params
-      params.fetch(:person, {})
-      params.require(:person).permit(:first_name, :last_name, :description, :user_id)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_person
+    @person = Person.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def person_params
+    params.fetch(:person, {})
+    params.require(:person).permit(:first_name, :last_name, :description, :user_id)
+  end
 end

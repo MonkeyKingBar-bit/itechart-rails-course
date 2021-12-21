@@ -12,6 +12,12 @@ AllCops:
     - 'tmp/**/*'
     - '.git/**/*'
     - 'bin/*'
+    - 'test/**/*'
+    - 'spec/**/*'
+    - 'db/schema.rb'
+    - 'db/**/*'
+    - 'config/**/*'
+    - 'config.ru'
   TargetRubyVersion: 2.5
   SuggestExtensions: false
 

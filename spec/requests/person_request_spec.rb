@@ -2,23 +2,25 @@
 
 require 'rails_helper'
 
-RSpec.describe 'Person', type: :request do
-  get users_path
+RSpec.describe Person, type: :request do
+  context 'Person has in db' do
+    it 'should create a new person and redirect to private account' do
+      get  '/users/sign_in'
 
-  post people_path,
-       params: { person: { first_name: 'John', last_name: 'Traver', description: 'husband' } }
+      post '/people',
+           params: { person: { first_name: 'John', last_name: 'Traver', description: 'husband' } }
 
-  expect(response.body).to include 'Person was successfully created.'
-  expect(response.status).to have_http_status(200)
-end
+      expect(response).to have_http_status(302)
+    end
 
-RSpec.describe 'Person with authentication', type: :request do
-  get users_path
+    it 'Person with authentication' do
+      get '/users/sign_in'
 
-  session['user_id'] = 1
-  post people_path,
-       params: { person: { first_name: 'John', last_name: 'Traver', description: 'husband' } }
+      session['user_id'] = 1
+      post '/people',
+           params: { person: { first_name: 'John', last_name: 'Traver', description: 'husband' } }
 
-  expect(response.body).to include 'Person was successfully created.'
-  expect(response.status).to have_http_status(200)
+      expect(response).to have_http_status(302)
+    end
+  end
 end

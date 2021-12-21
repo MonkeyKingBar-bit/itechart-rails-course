@@ -33,6 +33,7 @@ group :test do
   gem 'rubocop-rails', require: false
   gem 'selenium-webdriver'
   gem 'shoulda-matchers', '~> 5.0'
+  gem 'simplecov', require: false, group: :test
   gem 'webdrivers', '~> 5.0', require: false
 end
 
