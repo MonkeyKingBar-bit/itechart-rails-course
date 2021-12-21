@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Person < ApplicationRecord
   validates :first_name, presence: true, length: { minimum: 2 }
   validates :last_name, presence: true, length: { minimum: 2 }
@@ -12,7 +14,7 @@ class Person < ApplicationRecord
 
   def check_people_count
     throw(:abort) if user.people.count <= 1
-    end
+  end
 
   def check_uniqueness
     throw(:abort) if user.people.exists?(description: description)
