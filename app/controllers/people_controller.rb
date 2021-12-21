@@ -65,7 +65,7 @@ class PeopleController < ApplicationController
   end
 
   def correct_user
-    @person = current_user.people.find_by(person_id: params[:id])
+    @person = current_user.people.find_by(id: params[:id])
     redirect_to people_path, notice: 'Not Authorized To Edit This Person' if @person.nil?
   end
 
