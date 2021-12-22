@@ -2,6 +2,7 @@
 
 class CategoriesController < ApplicationController
   before_action :set_category, only: %i[show edit update destroy]
+  before_action :set_current_user_people, only: %i[index new]
 
   rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
 
@@ -20,10 +21,13 @@ class CategoriesController < ApplicationController
   # GET /categories/new
   def new
     @category = Category.new
+    @people = current_user.people
   end
 
   # GET /categories/1/edit
-  def edit; end
+  def edit
+    @people = current_user.people
+  end
 
   # POST /categories or /categories.json
   def create
@@ -57,7 +61,7 @@ class CategoriesController < ApplicationController
   def destroy
     @category.destroy
     respond_to do |format|
-      format.html { redirect_to categories_url }
+      format.html { redirect_to categories_path, notice: 'Category was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -71,6 +75,11 @@ class CategoriesController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def category_params
-    params.require(:category).permit(:title, :count, :user_id)
+    params.require(:category).permit(:title, :count, :person_id, :user_id)
+  end
+
+  # Set people for current user
+  def set_current_user_people
+    @people = current_user.people
   end
 end

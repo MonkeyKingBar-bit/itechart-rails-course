@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_22_040549) do
+ActiveRecord::Schema.define(version: 2021_12_22_112832) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(version: 2021_12_22_040549) do
     t.string "title"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "count"
+    t.string "transaction_type"
     t.integer "user_id"
     t.integer "person_id"
     t.index ["person_id"], name: "index_categories_on_person_id"
@@ -34,6 +34,13 @@ ActiveRecord::Schema.define(version: 2021_12_22_040549) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_people_on_user_id"
+  end
+
+  create_table "person_categories", force: :cascade do |t|
+    t.integer "person_id"
+    t.integer "category_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -52,5 +59,7 @@ ActiveRecord::Schema.define(version: 2021_12_22_040549) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "categories", "people", name: "fk_category_people"
+  add_foreign_key "categories", "users", name: "fk_category_users"
   add_foreign_key "people", "users"
 end

@@ -1,44 +1,15 @@
 <% if user_signed_in? %>
   <br />
   <div class="container">
-    <h1>Categories</h1>
-    <br />
-    <table class="table table-striped table-bordered table-hover">
-      <thead class="thead-dark">
-        <tr>
-          <th>Type</th>
-          <th>Count</th>
-          <th>Create</th>
-          <th>Update</th>
-          <th colspan="3"></th>
-        </tr>
-      </thead>
-
-      <tbody>
-        <% @categories.each do |category| %>
-          <tr>
-            <td><%= category.title %></td>
-            <td>N/A</td>
-            <td><%= category.created_at %></td>
-            <td><%= category.updated_at %></td>
-<!--            <td><%#= category.count %></td>-->
-<!--            <td><%#= link_to 'Show', category %></td>-->
-            <td><%= link_to 'Edit', edit_category_path(category), class: "btn btn-outline-dark" %></td>
-            <td><%= link_to 'Destroy', category, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-outline-danger btn-sm" %></td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
-    <br>
-    <%= link_to 'New Category', new_category_path, class:"btn btn-secondary" %>
-  </div>
-<% else %>
-  <div class="card bg-dark text-white text-center" style="height: 94vh; overflow: hidden;">
-    <img src="https://www.polsov.com/upload/014/u1405/b/d/a86b4cd5.jpg" class="card-img" alt="index images">
-    <div class="card-img-overlay">
-      <h5 class="card-title">Welcome to the Best Finance Apps to Manage Bills and Debts!</h5>
-      <p class="card-text">The main benefit of capital is not to make more money, but to make money for the sake of improving life.</p>
-      <p class="card-text">For use it, sign in or sign up</p>
+    <div class="jumbotron">
+      <h1>All categories: </h1>
+      <% @categories.each do |category|%>
+        <div class="rounded-pill <%= category.transaction_type == 'Debit' ? 'btn btn-success btn-lg' : 'btn btn-warning btn-lg' %>">
+          <%= link_to category.title, category_path(category), class: "link-light"%>
+        </div>
+      <% end %>
     </div>
+    <br />
+    <%= link_to 'New Category', new_category_path, class:"btn btn-secondary" %>
   </div>
 <% end %>
