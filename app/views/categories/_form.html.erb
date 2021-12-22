@@ -11,12 +11,20 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :title %>
-    <%= form.text_field :title %>
+  <div class="field form-group">
+    <%= form.text_field :title, class:"form-control", placeholder:"Type" %>
+  </div>
+  <br />
+  <div class="field form-group">
+    <%= form.text_field :count, class:"form-control", placeholder:"Count" %>
   </div>
 
+  <div class="field form-group">
+    <%= form.number_field :user_id, id: :category_user_id, class:"form-control", value: current_user.id, type: "hidden" %>
+  </div>
+
+  <br />
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit class:'btn btn-secondary' %>
   </div>
 <% end %>

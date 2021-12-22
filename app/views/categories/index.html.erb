@@ -8,6 +8,8 @@
         <tr>
           <th>Type</th>
           <th>Count</th>
+          <th>Create</th>
+          <th>Update</th>
           <th colspan="3"></th>
         </tr>
       </thead>
@@ -16,10 +18,13 @@
         <% @categories.each do |category| %>
           <tr>
             <td><%= category.title %></td>
-            <td><%= category.count %></td>
-            <td><%= link_to 'Show', category %></td>
-            <td><%= link_to 'Edit', edit_category_path(category) %></td>
-            <td><%= link_to 'Destroy', category, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            <td>N/A</td>
+            <td><%= category.created_at %></td>
+            <td><%= category.updated_at %></td>
+<!--            <td><%#= category.count %></td>-->
+<!--            <td><%#= link_to 'Show', category %></td>-->
+            <td><%= link_to 'Edit', edit_category_path(category), class: "btn btn-outline-dark" %></td>
+            <td><%= link_to 'Destroy', category, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-outline-danger btn-sm" %></td>
           </tr>
         <% end %>
       </tbody>
