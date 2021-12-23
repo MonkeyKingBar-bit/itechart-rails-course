@@ -5,20 +5,12 @@
     </h1>
     <br/>
     <p>
-      <strong>Type:</strong>
-      <%= @category.transaction_type %>
-    </p>
-    <p>
       <strong>Create:</strong>
       <%= @category.created_at %>
     </p>
     <p>
       <strong>Update:</strong>
       <%= @category.updated_at %>
-    </p>
-    <p>
-      <strong>Person:</strong>
-          <%= @people %>
     </p>
 
     <%= link_to 'Edit', edit_category_path(@category), class:"btn btn-secondary" %> |
