@@ -1,0 +1,20 @@
+<div class="container">
+  <div class="jumbotron">
+    <h1 class="display-4">
+      <%= @category.title %>
+    </h1>
+    <br/>
+    <p>
+      <strong>Create:</strong>
+      <%= @category.created_at %>
+    </p>
+    <p>
+      <strong>Update:</strong>
+      <%= @category.updated_at %>
+    </p>
+
+    <%= link_to 'Edit', edit_category_path(@category), class:"btn btn-secondary" %> |
+    <%= link_to 'Delete', category_path(@category), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %> |
+    <%= link_to 'Back', categories_path, class:"btn btn-dark" %>
+  </div>
+</div>
