@@ -4,12 +4,6 @@ class CategoriesController < ApplicationController
   before_action :set_category, only: %i[show edit update destroy]
   before_action :set_current_user_people, only: %i[index new]
 
-  rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
-
-  def render_not_found
-    render 'public/404,html.erb'
-  end
-
   # GET /categories or /categories.json
   def index
     @categories = Category.all
