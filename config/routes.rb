@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :transactions
+  resources :categories
   devise_for :users
   resources :people
   get "homepage", to: "home#homepage"

@@ -6,6 +6,8 @@ class Person < ApplicationRecord
   validates :description, presence: true, length: { minimum: 3 }
 
   belongs_to :user
+  has_many :person_categories, dependent: :destroy
+  has_many :categories, through: :person_categories
 
   before_create :check_uniqueness
   before_destroy :check_people_count
