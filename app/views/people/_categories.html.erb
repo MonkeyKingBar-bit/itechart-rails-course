@@ -1,0 +1,48 @@
+<% if obj.any? %>
+  <br />
+  <div class="container">
+    <table class="table table-striped table-bordered table-hover">
+    <thead class="thead-dark">
+    <tr>
+      <th>Title</th>
+      <th>Transactions</th>
+      <th>Total amount<th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <% obj.each do |person_category|%>
+      <tr>
+        <td>
+          <div class="badge rounded-pill <%= person_category.category.transaction_type == 'Debit' ? 'bg-success' : 'bg-warning' %>">
+            <%= link_to person_category.category.title, category_path(person_category.category), class: "link-light"%>
+          </div>
+        </td>
+        <td>
+          <% if person_category.transactions.any? %>
+            <ul class="list-reset">
+              <li>
+                <% person_category.transactions.each do |transaction|%>
+                  <p class="badge bg-primary"><%= transaction.count  %></p>
+                  <%= transaction.created_at.to_formatted_s(:short) %>
+                  <%= link_to 'Update', edit_transaction_path(transaction), class:"btn btn-secondary btn-sm" %> |
+                  <%= link_to 'Delete', transaction_path(transaction), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-outline-danger btn-sm" %>
+                <%end%>
+              </li>
+            </ul>
+          <% else %>
+            None
+          <% end %>
+        </td>
+        <td>
+          <%= person_category.transactions.sum(&:count) %>
+        <td>
+      <tr>
+    <% end %>
+    </tbody>
+  </table>
+  </div>
+
+<% else %>
+  <p> No categories yet ... <p>
+<% end %>

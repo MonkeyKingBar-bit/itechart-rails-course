@@ -1,27 +1,33 @@
 <%= form_with(model: transaction, local: true) do |form| %>
-  <% if transaction.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(transaction.errors.count, "error") %> prohibited this transaction from being saved:</h2>
+    <% if transaction.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(transaction.errors.count, "error") %> prohibited this transaction from being saved:</h2>
 
-      <ul>
-      <% transaction.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+        <ul>
+          <% transaction.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="field form-group">
+      <%= form.label :count %>
+      <%= form.number_field :count, class:"form-control"%>
     </div>
-  <% end %>
-
-  <div class="field">
-    <%= form.label :amountValue %>
-    <%= form.number_field :amountValue %>
-  </div>
-
-  <div class="field">
-    <%= form.label :personCategoryId %>
-    <%= form.number_field :personCategoryId %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
+  <br />
+    <% if transaction.new_record?%>
+      <div class="field form-group">
+        <%= form.label 'Category'%>
+        <%= form.collection_select(:person_category_id, PersonCategory.where(id: @people), :id, :category, {}, {required: true, class: "form-control"})%>
+      </div>
+    <% else %>
+      <div class="field form-group">
+        <%= form.hidden_field :person_category_id %>
+      </div>
+    <% end%>
+  <br />
+    <div class="actions">
+      <%= form.submit class:'btn btn-secondary' %>
+    </div>
 <% end %>

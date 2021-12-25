@@ -18,12 +18,8 @@ ActiveRecord::Schema.define(version: 2021_12_25_074247) do
   create_table "categories", force: :cascade do |t|
     t.string "title"
     t.string "transaction_type"
-    t.bigint "user_id"
-    t.bigint "person_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["person_id"], name: "index_categories_on_person_id"
-    t.index ["user_id"], name: "index_categories_on_user_id"
   end
 
   create_table "people", force: :cascade do |t|
@@ -64,7 +60,5 @@ ActiveRecord::Schema.define(version: 2021_12_25_074247) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "categories", "people"
-  add_foreign_key "categories", "users"
   add_foreign_key "people", "users"
 end
