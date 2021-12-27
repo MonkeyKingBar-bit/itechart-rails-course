@@ -22,12 +22,8 @@
   <br />
   <div class="field form-group">
     <%= form.label :person %>
-    <%= form.collection_select(:person_ids, @people, :id, :first_name, {}, { multiple: true, class: "form-control", required: true}) %>
+    <%= form.collection_select(:person_ids, @people, :id, :first_name, {}, { multiple: true, class: "form-control" }) %>
   </div>
-<!--  <br />-->
-<!--  <div class="field form-group">-->
-    <%#= form.number_field :user_id, id: :category_id, class:"form-control", value: current_user.id, type: "hidden" %>
-<!--  </div>-->
   <br />
   <div class="actions">
     <%= form.submit class:'btn btn-secondary' %>
