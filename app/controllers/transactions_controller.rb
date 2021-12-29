@@ -25,7 +25,7 @@ class TransactionsController < ApplicationController
   # POST /transactions or /transactions.json
   def create
     @transaction = Transaction.new(transaction_params)
-
+    create_note(@transaction, params.values[1][:body])
     respond_to do |format|
       if @transaction.save
         format.html { redirect_to @transaction, notice: 'Transaction was successfully created.' }
@@ -39,6 +39,7 @@ class TransactionsController < ApplicationController
 
   # PATCH/PUT /transactions/1 or /transactions/1.json
   def update
+    create_note(@transaction, params.values[2][:body]) unless @transaction.note
     respond_to do |format|
       if @transaction.update(transaction_params)
         format.html { redirect_to @transaction, notice: 'Transaction was successfully updated.' }
@@ -55,7 +56,7 @@ class TransactionsController < ApplicationController
     @transaction.destroy
     respond_to do |format|
       format.html do
-        redirect_to transactions_url, notice: 'Transaction was successfully destroyed.'
+        redirect_to person_path(@person), notice: 'Transaction was successfully destroyed.'
       end
       format.json { head :no_content }
     end
@@ -63,9 +64,20 @@ class TransactionsController < ApplicationController
 
   private
 
+  # Create note
+  def create_note(transaction, body)
+    note = Note.new(body: body)
+    if note.valid?
+      transaction.note = note
+    else
+      flash[:alert] = 'Note was not saved, maybe it was invalid'
+    end
+  end
+
   # Use callbacks to share common setup or constraints between actions.
   def set_transaction
     @transaction = Transaction.find(params[:id])
+    return if current_user == @transaction.person_category.person.user
   end
 
   # Only allow a list of trusted parameters through.

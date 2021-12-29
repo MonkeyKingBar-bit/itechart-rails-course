@@ -1,11 +1,30 @@
+<br />
 <div class="container">
   <div class="jumbotron">
     <h1 class="display-4">
-      <%= @transaction.count %>
+      <%= @transaction.person_category.person.first_name %>
+      <%= @transaction.person_category.person.last_name %>
     </h1>
+
+    <h5>
+      <%= @transaction.person_category.category.title %>,
+      <%= @transaction.count %> USD
+      - <%= @transaction.person_category.category.transaction_type %>
+    </h5>
+
     <p class="lead">
-      <%= @transaction.person_category.category.title %>
+      Created: <%= @transaction.created_at %>
     </p>
+
+    <% if @note %>
+      <p class="card-text">Note: <%= @note.body%></p>
+      <%= link_to "Edit note", edit_note_path(@note) %> |
+      <%= link_to "Delete note", note_path(@note), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger" %>
+    <% else %>
+      No notes yet...
+      <br />
+    <%end%>
+
     <br/>
     <%= link_to 'Edit', edit_transaction_path(@transaction), class:"btn btn-secondary" %> |
     <%= link_to 'Delete', @transaction, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %> |

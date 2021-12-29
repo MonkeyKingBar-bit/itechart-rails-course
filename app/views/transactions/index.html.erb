@@ -13,15 +13,13 @@
     <tbody>
       <% @transactions.each do |transaction| %>
         <tr>
-          <td><%= transaction.count %></td>
+          <td><%= link_to transaction.count, transaction %></td>
           <td><%= transaction.person_category.category.title %></td>
-          <td><%= link_to 'Show', transaction %></td>
-          <td><%= link_to 'Edit', edit_transaction_path(transaction) %></td>
+          <td><%= link_to 'Edit', edit_transaction_path(transaction), class:"btn btn-secondary" %></td>
           <td><%= link_to 'Destroy', transaction, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-outline-danger btn-sm" %></td>
         </tr>
       <% end %>
     </tbody>
   </table>
   <br>
-  <%#= link_to 'New Transaction', new_transaction_path %>
 </div>
