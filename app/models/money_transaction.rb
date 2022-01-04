@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Transaction < ApplicationRecord
+class MoneyTransaction < ApplicationRecord
   validates :count, presence: true
   validates :count, numericality: { greater_than: 0.0 }
 

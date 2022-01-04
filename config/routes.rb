@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users
   resources :categories
-  resources :transactions
+  resources :money_transactions
   resources :people
   get "homepage", to: "home#homepage"
   root "people#index"

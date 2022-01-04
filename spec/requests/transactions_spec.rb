@@ -1,11 +1,11 @@
  require 'rails_helper'
 
-RSpec.describe "/transactions", type: :request do
-  context 'Transaction has in db' do
+RSpec.describe "/money_transactions", type: :request do
+  context 'MoneyTransaction has in db' do
     it 'should create a new transaction and redirect for details' do
       get  '/users/sign_in'
 
-      post '/transactions',
+      post '/money_transactions',
            params: { transaction: { count: 12} }
 
       expect(response).to have_http_status(302)
@@ -15,7 +15,7 @@ RSpec.describe "/transactions", type: :request do
       get '/users/sign_in'
 
       session['user_id'] = 1
-      post '/transactions',
+      post '/money_transactions',
            params: { transaction: { count: 150} }
 
       expect(response).to have_http_status(302)

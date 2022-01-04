@@ -1,30 +1,30 @@
 # frozen_string_literal: true
 
-class TransactionsController < ApplicationController
+class MoneyTransactionsController < ApplicationController
   before_action :set_transaction, only: %i[show edit update destroy]
   before_action :set_person_category, only: [:destroy]
   before_action :set_person_created_for, only: %i[create update]
 
-  # GET /transactions or /transactions.json
+  # GET /money_transactions or /money_transactions.json
   def index
-    @transactions = Transaction.all
+    @transactions = MoneyTransaction.all
   end
 
-  # GET /transactions/1 or /transactions/1.json
+  # GET /money_transactions/1 or /money_transactions/1.json
   def show; end
 
-  # GET /transactions/new
+  # GET /money_transactions/new
   def new
     @people = current_user.people
-    @transaction = Transaction.new
+    @transaction = MoneyTransaction.new
   end
 
-  # GET /transactions/1/edit
+  # GET /money_transactions/1/edit
   def edit; end
 
-  # POST /transactions or /transactions.json
+  # POST /money_transactions or /money_transactions.json
   def create
-    @transaction = Transaction.new(transaction_params)
+    @transaction = MoneyTransaction.new(transaction_params)
 
     respond_to do |format|
       if @transaction.save
@@ -37,7 +37,7 @@ class TransactionsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /transactions/1 or /transactions/1.json
+  # PATCH/PUT /money_transactions/1 or /money_transactions/1.json
   def update
     respond_to do |format|
       if @transaction.update(transaction_params)
@@ -50,7 +50,7 @@ class TransactionsController < ApplicationController
     end
   end
 
-  # DELETE /transactions/1 or /transactions/1.json
+  # DELETE /money_transactions/1 or /money_transactions/1.json
   def destroy
     @transaction.destroy
     respond_to do |format|
@@ -65,12 +65,12 @@ class TransactionsController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_transaction
-    @transaction = Transaction.find(params[:id])
+    @transaction = MoneyTransaction.find(params[:id])
   end
 
   # Only allow a list of trusted parameters through.
   def transaction_params
-    params.require(:transaction).permit(:count, :person_category_id)
+    params.require(:money_transaction).permit(:count, :person_category_id)
   end
 
   def set_person_category

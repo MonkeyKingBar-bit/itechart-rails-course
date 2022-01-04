@@ -19,9 +19,9 @@
           </div>
         </td>
         <td>
-          <% if person_category.transactions.any? %>
+          <% if person_category.money_transactions.any? %>
             <ul class="list-group">
-                <% person_category.transactions.each do |transaction|%>
+                <% person_category.money_transactions.each do |transaction|%>
                   <li class="list-group-item d-flex justify-content-between align-items-center">
                     <div class="d-flex w-100 justify-content-between">
                       <span class="badge bg-primary rounded-pill"><%= transaction.count  %></span>
@@ -29,8 +29,8 @@
                     </div>
                     <br />
                     <div class="d-flex w-50 justify-content-around">
-                      <%= link_to 'Update', edit_transaction_path(transaction), class:"btn btn-secondary btn-sm" %> |
-                      <%= link_to 'Delete', transaction_path(transaction), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-outline-danger btn-sm" %>
+                      <%= link_to 'Update', edit_money_transaction_path(transaction), class:"btn btn-secondary btn-sm" %> |
+                      <%= link_to 'Delete', money_transaction_path(transaction), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-outline-danger btn-sm" %>
                     </div>
                   </li>
               <%end%>
@@ -39,7 +39,7 @@
             None
           <% end %>
         </td>
-        <td class="text-center"><h3><%= person_category.transactions.sum(&:count) %></h3><td>
+        <td class="text-center"><h3><%= person_category.money_transactions.sum(&:count) %></h3><td>
       </tr>
     <% end %>
     </tbody>

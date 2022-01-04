@@ -7,8 +7,8 @@
       <%= @transaction.person_category.category.title %>
     </p>
     <br/>
-    <%= link_to 'Edit', edit_transaction_path(@transaction), class:"btn btn-secondary" %> |
+    <%= link_to 'Edit', edit_money_transaction_path(@transaction), class:"btn btn-secondary" %> |
     <%= link_to 'Delete', @transaction, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %> |
-    <%= link_to 'Back', transactions_path, class:"btn btn-dark" %>
+    <%= link_to 'Back', money_transactions_path, class:"btn btn-dark" %>
   </div>
 </div>
