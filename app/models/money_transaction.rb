@@ -5,4 +5,5 @@ class MoneyTransaction < ApplicationRecord
   validates :count, numericality: { greater_than: 0.0 }
 
   belongs_to :person_category
+  belongs_to :note, optional: true, dependent: :destroy
 end
