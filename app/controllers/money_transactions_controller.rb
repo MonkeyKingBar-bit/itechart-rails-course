@@ -25,7 +25,7 @@ class MoneyTransactionsController < ApplicationController
   # POST /money_transactions or /money_transactions.json
   def create
     @transaction = MoneyTransaction.new(transaction_params)
-
+    create_note(@transaction, params[:body])
     respond_to do |format|
       if @transaction.save
         format.html { redirect_to @transaction, notice: 'Transaction was successfully created.' }
@@ -39,6 +39,7 @@ class MoneyTransactionsController < ApplicationController
 
   # PATCH/PUT /money_transactions/1 or /money_transactions/1.json
   def update
+    create_note(@transaction, params[:body]) unless @transaction.note_id
     respond_to do |format|
       if @transaction.update(transaction_params)
         format.html { redirect_to @transaction, notice: 'Transaction was successfully updated.' }
@@ -62,6 +63,16 @@ class MoneyTransactionsController < ApplicationController
   end
 
   private
+
+  # create note
+  def create_note(transaction, body)
+    note = Note.new(body: body)
+    if note.valid?
+      transaction.note_id = note
+    else
+      flash[:alert] = 'Note was not saved, maybe it was invalid'
+    end
+  end
 
   # Use callbacks to share common setup or constraints between actions.
   def set_transaction
