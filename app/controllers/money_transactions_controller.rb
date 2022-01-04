@@ -55,7 +55,7 @@ class MoneyTransactionsController < ApplicationController
     @transaction.destroy
     respond_to do |format|
       format.html do
-        redirect_to transactions_url, notice: 'Transaction was successfully destroyed.'
+        redirect_to money_transactions_url, notice: 'Transaction was successfully destroyed.'
       end
       format.json { head :no_content }
     end

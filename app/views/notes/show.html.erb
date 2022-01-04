@@ -1,0 +1,8 @@
+<div class="container">
+  <h1 class="display-4">Text:</h1>
+  <p><%= @note.body %></p>
+
+  <br />
+  <%= link_to 'Edit', edit_note_path(@note), class:"btn btn-secondary" %> |
+  <%= link_to 'Back', notes_path, class:"btn btn-dark" %>
+</div>

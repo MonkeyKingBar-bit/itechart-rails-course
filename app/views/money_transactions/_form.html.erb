@@ -21,12 +21,23 @@
         <%= form.label 'Category'%>
         <%= form.select(:person_category_id, options_for_select(PersonCategory.where(id: @people).map {|pc| [pc.select_title, pc.id]}), {}, class: "form-control")%>
       </div>
+      <br />
+      <div class="field form-group">
+        <%= form.label 'Note' %>
+        <%= form.text_field :body, class: "form-control", placeholder: "write your text ..." %>
+      </div>
     <% else %>
+      <% unless transaction.note_id %>
+        <div class="field form-group">
+          <%=  form.label 'Note'  %>
+          <%= form.text_field :body, class: "form-control" %>
+        </div>
+<%  end %>
       <div class="field form-group">
         <%= form.hidden_field :person_category_id %>
       </div>
     <% end%>
-  <br />
+    <br />
     <div class="actions">
       <%= form.submit class:'btn btn-secondary' %>
     </div>
