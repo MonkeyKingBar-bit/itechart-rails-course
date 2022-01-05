@@ -11,7 +11,11 @@ class MoneyTransactionsController < ApplicationController
   end
 
   # GET /money_transactions/1 or /money_transactions/1.json
-  def show; end
+  def show
+    @person = Person.find(PersonCategory.find(@transaction.person_category_id).id)
+    @category = Category.find(PersonCategory.find(@transaction.person_category_id).category_id)
+    @note = @transaction.note
+  end
 
   # GET /money_transactions/new
   def new
@@ -25,29 +29,23 @@ class MoneyTransactionsController < ApplicationController
   # POST /money_transactions or /money_transactions.json
   def create
     @transaction = MoneyTransaction.new(transaction_params)
-    create_note(@transaction, params[:body])
-    respond_to do |format|
-      if @transaction.save
-        format.html { redirect_to @transaction, notice: 'Transaction was successfully created.' }
-        format.json { render :show, status: :created, location: @transaction }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @transaction.errors, status: :unprocessable_entity }
-      end
+    create_note(@transaction, params)
+    if @transaction.save
+      flash[:notice] = 'Transaction was successfully created.'
+      redirect_to person_path(@person)
+    else
+      render :new
     end
   end
 
   # PATCH/PUT /money_transactions/1 or /money_transactions/1.json
   def update
-    create_note(@transaction, params[:body]) unless @transaction.note_id
-    respond_to do |format|
-      if @transaction.update(transaction_params)
-        format.html { redirect_to @transaction, notice: 'Transaction was successfully updated.' }
-        format.json { render :show, status: :ok, location: @transaction }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @transaction.errors, status: :unprocessable_entity }
-      end
+    # create_note(@transaction, params.values[2][:body]) unless @transaction.note
+    if @transaction.update(transaction_params)
+      flash[:notice] = 'Transaction was successfully updated.'
+      redirect_to money_transaction_path(@transaction)
+    else
+      render :edit
     end
   end
 
@@ -65,10 +63,12 @@ class MoneyTransactionsController < ApplicationController
   private
 
   # create note
-  def create_note(transaction, body)
-    note = Note.new(body: body)
+  def create_note(transaction, params)
+    return if params[:note_required].nil?
+
+    note = Note.new(body: params[:note_body].values[0])
     if note.valid?
-      transaction.note_id = note
+      transaction.note = note
     else
       flash[:alert] = 'Note was not saved, maybe it was invalid'
     end
