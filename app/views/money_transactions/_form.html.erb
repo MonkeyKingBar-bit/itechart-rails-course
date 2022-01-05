@@ -27,7 +27,7 @@
         <%= form.text_field :body, class: "form-control", placeholder: "write your text ..." %>
       </div>
     <% else %>
-      <% unless transaction.note_id %>
+      <% if !transaction.note %>
         <div class="field form-group">
           <%=  form.label 'Note'  %>
           <%= form.text_field :body, class: "form-control" %>

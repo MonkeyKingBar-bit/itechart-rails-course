@@ -52,7 +52,7 @@ class NotesController < ApplicationController
   def destroy
     @note.destroy
     respond_to do |format|
-      format.html { redirect_to  money_transaction_path(@transaction), notice: 'Note was successfully destroyed.' }
+      format.html { redirect_to money_transaction_path(@transaction), notice: 'Note was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -67,5 +67,9 @@ class NotesController < ApplicationController
   # Only allow a list of trusted parameters through.
   def note_params
     params.require(:note).permit(:body)
+  end
+
+  def set_transaction
+    @transaction = @note.money_transaction
   end
 end
