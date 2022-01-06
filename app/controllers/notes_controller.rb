@@ -20,6 +20,21 @@ class NotesController < ApplicationController
   # GET /notes/1/edit
   def edit; end
 
+  # POST /categories or /categories.json
+  def create
+    @note = Note.new(note_params)
+
+    respond_to do |format|
+      if @note.save
+        format.html { redirect_to @note, notice: 'Note was successfully created.' }
+        format.json { render :show, status: :created, location: @note }
+      else
+        format.html { render :new, status: :unprocessable_entity }
+        format.json { render json: @note.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   # PATCH/PUT /notes/1 or /notes/1.json
   def update
     respond_to do |format|
