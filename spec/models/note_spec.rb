@@ -20,21 +20,4 @@ RSpec.describe Note, type: :model do
     note.body = '     '
     expect(note).not_to be_valid
   end
-
-  it 'should create new note' do
-    expect { Note.create(body: 'Some note about transaction') }.to change(Note, :count).by(1)
-  end
-
-  it 'should delete note' do
-    note = Note.create(body: 'Some note about transaction')
-    expect { note.destroy }.to change(Note, :count).by(-1)
-  end
-
-  it 'should deleted with transaction' do
-    person.categories << Category.create(title: 'car')
-    transaction = MoneyTransaction.create(count: 80, person_category_id: person.person_categories.first.id)
-    note = Note.create(body: 'Some note about transaction')
-    transaction.note = note
-    expect { transaction.destroy }.to change(Note, :count).by(-1)
-  end
 end
