@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Note < ApplicationRecord
-  validates :body, presence: true, length: { minimum: 2, maximum: 100 }
+  belongs_to :money_transaction, optional: true
 
-  has_one :money_transaction, dependent: :nullify
+  validates :body, presence: true, length: { minimum: 2, maximum: 100 }
 end

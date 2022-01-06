@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(version: 2022_01_05_172444) do
   create_table "money_transactions", force: :cascade do |t|
     t.integer "count"
     t.integer "person_category_id"
+    t.integer "note_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

@@ -40,7 +40,6 @@ class MoneyTransactionsController < ApplicationController
 
   # PATCH/PUT /money_transactions/1 or /money_transactions/1.json
   def update
-    # create_note(@transaction, params.values[2][:body]) unless @transaction.note
     if @transaction.update(transaction_params)
       flash[:notice] = 'Transaction was successfully updated.'
       redirect_to money_transaction_path(@transaction)
@@ -54,7 +53,7 @@ class MoneyTransactionsController < ApplicationController
     @transaction.destroy
     respond_to do |format|
       format.html do
-        redirect_to money_transactions_url, notice: 'Transaction was successfully destroyed.'
+        redirect_to person_path(@person), notice: 'Transaction was successfully destroyed.'
       end
       format.json { head :no_content }
     end
@@ -67,6 +66,7 @@ class MoneyTransactionsController < ApplicationController
     return if params[:note_required].nil?
 
     note = Note.new(body: params[:note_body].values[0])
+    transaction.note = note if note.valid?
     if note.valid?
       transaction.note = note
     else
