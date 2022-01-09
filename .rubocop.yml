@@ -1,11 +1,8 @@
 # This is the configuration used to check the rubocop source code.
 
-inherit_from: .rubocop_todo.yml
 require:
   - rubocop/cop/internal_affairs
-  - rubocop-performance
-  - rubocop-rspec
-  - rubocop-rake
+  - rubocop-rails
 
 AllCops:
   NewCops: enable
@@ -21,7 +18,6 @@ AllCops:
     - 'db/**/*'
     - 'config/**/*'
     - 'config.ru'
-
   TargetRubyVersion: 2.5
   SuggestExtensions: false
 
@@ -37,6 +33,9 @@ Style/AccessorGrouping:
   Exclude:
     - lib/rubocop/formatter/base_formatter.rb
     - lib/rubocop/cop/offense.rb
+
+Style/Documentation:
+  Enabled: false
 
 Style/FormatStringToken:
   # Because we parse a lot of source codes from strings. Percent arrays
@@ -109,37 +108,6 @@ Naming/InclusiveLanguage:
         - offense
   Exclude:
     - lib/rubocop/cop/naming/inclusive_language.rb
-
-RSpec/FilePath:
-  Exclude:
-    - spec/rubocop/cop/internal_affairs/redundant_let_rubocop_config_new_spec.rb
-    - spec/rubocop/formatter/junit_formatter_spec.rb
-
-RSpec/PredicateMatcher:
-  EnforcedStyle: explicit
-
-RSpec/MessageSpies:
-  EnforcedStyle: receive
-
-RSpec/NestedGroups:
-  Max: 7
-
-RSpec/MultipleMemoizedHelpers:
-  Enabled: false
-
-Performance/CollectionLiteralInLoop:
-  Exclude:
-    - 'Rakefile'
-    - 'spec/**/*.rb'
-
-Performance/EndWith:
-  SafeMultiline: false
-
-Performance/StartWith:
-  SafeMultiline: false
-
-RSpec/StubbedMock:
-  Enabled: false
 
 InternalAffairs/ExampleDescription:
   Include:

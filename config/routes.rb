@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
-  get "persons/profile", as: "user_root"
   devise_for :users
-  resources :users
-  root "pages#home"
+  resources :categories
+  resources :transactions
+  resources :people
+  get "homepage", to: "home#homepage"
+  root "people#index"
 end

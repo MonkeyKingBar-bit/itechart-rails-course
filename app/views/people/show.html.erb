@@ -1,0 +1,23 @@
+<div class="container">
+  <div class="jumbotron">
+    <h1 class="display-4">
+      <%= @person.first_name %>
+      <%= @person.last_name %>
+    </h1>
+    <p class="lead">
+      <%= @person.description %> |
+      <%= @person.updated_at %>
+    </p>
+    <br/>
+    <h2> Categories </h2>
+
+    <%= render 'categories', obj: @person_categories %>
+
+    <br />
+    <%= link_to 'Edit', edit_person_path(@person), class:"btn btn-secondary" %> |
+
+    <%= link_to 'Delete', @person, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %> |
+
+    <%= link_to 'Back', people_path, class:"btn btn-dark" %>
+  </div>
+</div>
