@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_25_074247) do
+ActiveRecord::Schema.define(version: 2022_01_05_172444) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -18,6 +18,20 @@ ActiveRecord::Schema.define(version: 2021_12_25_074247) do
   create_table "categories", force: :cascade do |t|
     t.string "title"
     t.string "transaction_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "money_transactions", force: :cascade do |t|
+    t.integer "count"
+    t.integer "person_category_id"
+    t.integer "note_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "notes", force: :cascade do |t|
+    t.string "body"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -35,13 +49,6 @@ ActiveRecord::Schema.define(version: 2021_12_25_074247) do
   create_table "person_categories", force: :cascade do |t|
     t.integer "person_id"
     t.integer "category_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "transactions", force: :cascade do |t|
-    t.integer "count"
-    t.integer "person_category_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
