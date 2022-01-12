@@ -20,10 +20,11 @@
         <p class="card-text">Note: <%= @note.body%></p>
         <%= link_to "Edit note", edit_note_path(@note) %> |
         <%= link_to "Delete note", note_path(@note), method: :delete, data: { confirm: "Are you sure?" } %>
-      <% else %>
+        <br />
+    <% else %>
         No notes yet...
         <br />
-      <%end%>
+    <%end%>
 
     <br/>
     <%= link_to 'Edit', edit_money_transaction_path(@transaction), class:"btn btn-secondary" %> |
