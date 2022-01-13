@@ -1,18 +1,22 @@
 <%if obj.any?%>
-  <table class="table">
-    <thead>
-    <tr>
-      <th> Category </th>
-      <th> Amount </th>
-    </tr>
-    </thead>
-    <tbody>
-    <% obj.each do |category|%>
+  <br />
+  <div class="container">
+    <table class="table table-striped table-bordered table-hover">
+      <thead class="thead-dark">
       <tr>
-        <td><%= category[0] %></td>
-        <td><%= category[1] %></td>
+        <th> Category </th>
+        <th> Amount </th>
       </tr>
-    <% end%>
-    </tbody>
-  </table>
+      </thead>
+
+      <tbody>
+      <% obj.each do |category|%>
+        <tr>
+          <td><%= category[0] %></td>
+          <td><%= category[1] %></td>
+        </tr>
+      <% end%>
+      </tbody>
+    </table>
+  </div>
 <% end %>

@@ -17,32 +17,6 @@ class ChartsController < ApplicationController
     @chart_credit_data = get_credit_transactions(@categories, @start_date, @end_date)
   end
 
-  # GET /charts/1 or /charts/1.json
-  def show; end
-
-  # GET /charts/new
-  def new
-    @chart = Chart.new
-  end
-
-  # GET /charts/1/edit
-  def edit; end
-
-  # POST /charts or /charts.json
-  def create
-    @chart = Chart.new(chart_params)
-
-    respond_to do |format|
-      if @chart.save
-        format.html { redirect_to @chart, notice: 'Chart was successfully created.' }
-        format.json { render :show, status: :created, location: @chart }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @chart.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
   # PATCH/PUT /charts/1 or /charts/1.json
   def update
     respond_to do |format|

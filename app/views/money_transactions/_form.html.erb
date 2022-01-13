@@ -19,7 +19,7 @@
     <% if transaction.new_record?%>
       <div class="field form-group">
         <%= form.label 'Category'%>
-        <%= form.select(:person_category_id, options_for_select(PersonCategory.where(id: @people).map {|pc| [pc.select_title, pc.id]}), {}, class: "form-control")%>
+        <%= form.select(:person_category_id, options_for_select(PersonCategory.where(person_id: @people).order(:person_id).map { |pc| [pc.select_title, pc.id]}), {}, {required: true, class: "form-control"}) %>
       </div>
       <br />
       <div class="field form-group">
