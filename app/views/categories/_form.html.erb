@@ -17,7 +17,8 @@
   </div>
   <br />
   <div class="field form-group">
-    <%= form.select :transaction_type, ['Debit', 'Credit'], {}, class:"form-control"%>
+    <%= form.select(:transaction_type, [['Debit', true], ['Credit', false]], {}, class:"form-control")%>
+
   </div>
   <br />
   <div class="field form-group">
