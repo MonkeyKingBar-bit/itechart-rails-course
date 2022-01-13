@@ -27,16 +27,23 @@
         <%= form.text_field :body, class: "form-control", placeholder: "write your text ..." %>
       </div>
     <% else %>
-      <% if !transaction.note %>
-        <div class="field form-group">
-          <%=  form.label 'Note'  %>
-          <%= form.text_field :body, class: "form-control" %>
-        </div>
-<%  end %>
+      <% unless transaction.note %>
+          <div class="field form-group">
+            <%=   form.label 'Note'   %>
+            <%= form.text_field :body, class: "form-control" %>
+          </div>
+      <%   end %>
       <div class="field form-group">
         <%= form.hidden_field :person_category_id %>
       </div>
     <% end%>
+
+  <br />
+  <div class="field form-group">
+    <%= form.label 'Is it important?'%>
+    <%= form.select(:important, [ ['Yes', true], ['No', false]], {}, {required: true, class: "form-control"}) %>
+  </div>
+
     <br />
     <div class="actions">
       <%= form.submit class:'btn btn-secondary' %>
