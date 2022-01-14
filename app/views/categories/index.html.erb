@@ -5,7 +5,7 @@
       <h1>All categories: </h1>
       <br />
       <% @categories.each do |category|%>
-        <div class="rounded-pill <%= category.transaction_type == 'Debit' ? 'btn btn-success btn-lg' : 'btn btn-warning btn-lg' %>">
+        <div class="rounded-pill <%= category.transaction_type == true ? 'btn btn-success btn-lg' : 'btn btn-warning btn-lg' %>">
           <%= link_to category.title, category_path(category), class: "link-light"%>
         </div>
       <% end %>

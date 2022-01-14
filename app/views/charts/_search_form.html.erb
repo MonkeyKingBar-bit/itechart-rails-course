@@ -1,0 +1,16 @@
+<br />
+<div class="container">
+    <%= form_for :search, method: :get do |form| %>
+        <div class="d-flex justify-content-around align-items-center w-50">
+          <div class="col-3">
+            <%= form.date_field :start_date, value: @start_date.to_date, class: "form-control", data: { behavior: "flatpickr" } %>
+          </div>
+          and
+          <div class="col-3">
+            <%= form.date_field :end_date, value: @end_date.to_date, class: "form-control", data: { behavior: "flatpickr" }%>
+          </div>
+            <%= form.submit 'Search', class:'btn btn-secondary col-4' %>
+      </div>
+
+<% end %>
+</div>

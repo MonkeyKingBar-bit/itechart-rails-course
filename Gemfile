@@ -6,9 +6,11 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.6.9'
 
+gem 'chartkick'
 gem 'coffee-rails', '~> 4.2'
 gem 'devise'
 gem 'duktape'
+gem 'groupdate'
 gem 'jbuilder', '~> 2.5'
 gem 'pg'
 gem 'puma', '~> 3.11'

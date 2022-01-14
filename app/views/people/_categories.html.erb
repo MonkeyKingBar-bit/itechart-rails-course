@@ -14,7 +14,7 @@
     <% obj.each do |person_category|%>
       <tr>
         <td class="text-center">
-          <div class="rounded-pill <%= person_category.category.transaction_type == 'Debit' ? 'btn btn-success btn-lg' : 'btn btn-warning btn-lg' %>">
+          <div class="rounded-pill <%= person_category.category.transaction_type == true ? 'btn btn-success btn-lg' : 'btn btn-warning btn-lg' %>">
             <%= link_to person_category.category.title, category_path(person_category.category), class: "link-light"%>
           </div>
         </td>
