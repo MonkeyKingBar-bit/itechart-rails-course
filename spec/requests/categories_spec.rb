@@ -6,7 +6,7 @@ RSpec.describe Category, type: :request do
       get  '/users/sign_in'
 
       post '/categories',
-           params: { category: { title: 'Car', transaction_type: 'Credit'} }
+           params: { category: { title: 'Car', transaction_type: false} }
 
       expect(response).to have_http_status(302)
     end
@@ -16,7 +16,7 @@ RSpec.describe Category, type: :request do
 
       session['user_id'] = 1
       post '/categories',
-           params: { category: { title: 'Car', transaction_type: 'Credit'} }
+           params: { category: { title: 'Car', transaction_type: false} }
 
       expect(response).to have_http_status(302)
     end

@@ -1,1 +1,3 @@
-json.array! @charts, partial: "charts/chart", as: :chart
+# frozen_string_literal: true
+
+json.array! @charts, partial: 'charts/chart', as: :chart

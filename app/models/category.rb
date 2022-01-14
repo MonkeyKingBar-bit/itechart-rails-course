@@ -18,4 +18,8 @@ class Category < ApplicationRecord
       return false if person.categories.count <= 1
     end
   end
+
+  def debit_to_string
+    transaction_type == true ? 'Debit' : 'Credit'
+  end
 end

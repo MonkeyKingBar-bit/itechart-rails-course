@@ -1,19 +1,14 @@
 <br />
 <div class="container">
-  <h1>Statistics for current month</h1>
+  <h1>Information about current month</h1>
 
   <%= render 'search_form'%>
-
-  <p> Your people are: </p>
-    <% @people.each do |p|%>
-      <p><%= link_to p.first_name + ' ' + p.last_name, person_path(p.id) %><p>
-    <% end %>
-
-
 <!--  <p> Current range: <%#= @start_date.to_date %> - <%#= @end_date.to_date%> </p>-->
   <br />
   <div class="text-center">
+    <hr />
     <h2>Credits</h2>
+    <hr />
     <br />
     <div class="d-flex justify-content-between align-items-center">
       <%= pie_chart @chart_credit_data, donut: true, width: '700px' %>
@@ -23,11 +18,21 @@
 
   <br />
   <div class="text-center">
+    <hr />
     <h2 >Debits</h2>
+    <hr />
     <br />
     <div class="d-flex justify-content-between align-items-center">
       <%= pie_chart @chart_debit_data, donut: true, width: '700px' %>
       <%= render 'table', obj: @chart_debit_data%>
     </div>
+  </div>
+
+  <br />
+  <div class="container d-flex align-items-center justify-content-center">
+    <p> Your people are: &nbsp;</p>
+    <% @people.each do |p|%>
+      <p><%= link_to p.first_name + ' ' + p.last_name, person_path(p.id)%>, &nbsp;</p>
+    <% end %>
   </div>
 </div>

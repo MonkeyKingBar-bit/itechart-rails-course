@@ -3,6 +3,7 @@
 class ChartsController < ApplicationController
   before_action :set_user_people, only: %i[index]
 
+  # rubocop:disable Metrics/AbcSize
   # GET /charts or /charts.json
   def index
     if params_date_validator(params)
@@ -16,6 +17,7 @@ class ChartsController < ApplicationController
     @chart_debit_data = get_debit_transactions(@categories, @start_date, @end_date)
     @chart_credit_data = get_credit_transactions(@categories, @start_date, @end_date)
   end
+  # rubocop:enable Metrics/AbcSize
 
   # PATCH/PUT /charts/1 or /charts/1.json
   def update
@@ -44,8 +46,9 @@ class ChartsController < ApplicationController
   def get_debit_transactions(categories, start_d, end_d)
     debit_transactions = []
     categories.select(&:transaction_type).each do |category|
-      debit_transactions += [[category.title, MoneyTransaction.where(person_category_id: category.person_categories,
-                                                                     created_at: start_d..end_d)
+      debit_transactions += [[category.title, MoneyTransaction.where(
+        person_category_id: category.person_categories, created_at: start_d..end_d
+      )
                                                               .sum(:count)]]
     end
     debit_transactions
