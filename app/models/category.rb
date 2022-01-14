@@ -6,9 +6,6 @@ class Category < ApplicationRecord
   has_many :person_categories, dependent: :destroy
   has_many :people, through: :person_categories
 
-  # scope :credit_cats, ->(categories) { where(id: categories, transaction_type: false) }
-  # scope :debit_cats, ->(categories) { where(id: categories, transaction_type: true) }
-
   before_destroy :check_people_count
 
   private

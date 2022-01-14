@@ -14,8 +14,8 @@ class ChartsController < ApplicationController
       @end_date = date_to_datetime(Date.parse(params[:money_transaction][:end_date]))
     end
     @categories = current_user.people.collect(&:categories).flatten.uniq
-    @chart_debit_data = get_debit_transactions(@categories, @start_date, @end_date)
-    @chart_credit_data = get_credit_transactions(@categories, @start_date, @end_date)
+    @chart_debit_data = transactions_by_type(@categories, @start_date, @end_date, true)
+    @chart_credit_data = transactions_by_type(@categories, @start_date, @end_date, false)
   end
   # rubocop:enable Metrics/AbcSize
 
@@ -43,27 +43,16 @@ class ChartsController < ApplicationController
 
   private
 
-  def get_debit_transactions(categories, start_d, end_d)
-    debit_transactions = []
-    categories.select(&:transaction_type).each do |category|
-      debit_transactions += [[category.title, MoneyTransaction.where(
+  def transactions_by_type(categories, start_d, end_d, trs_type)
+    transactions = []
+    categories_type =
+      trs_type ? categories.select(&:transaction_type) : categories.reject(&:transaction_type)
+    categories_type.each do |category|
+      transactions += [[category.title, MoneyTransaction.where(
         person_category_id: category.person_categories, created_at: start_d..end_d
-      )
-                                                              .sum(:count)]]
+      ).sum(:count)]]
     end
-    debit_transactions
-  end
-
-  def get_credit_transactions(categories, start_d, end_d)
-    credit_transactions = []
-    categories.reject(&:transaction_type).each do |category|
-      credit_transactions += [
-        [category.title, MoneyTransaction.where(person_category_id: category.person_categories,
-                                                created_at: start_d..end_d)
-                                         .sum(:count)]
-      ]
-    end
-    credit_transactions
+    transactions
   end
 
   def params_date_validator(params)
